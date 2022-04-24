@@ -1,0 +1,37 @@
+#include<bits/stdc++.h>
+#include<ctime>
+using namespace std;
+#define ll long long int
+void transmission(ll &i, ll &N, ll &tf, ll &tt){
+	while(i <= tf){
+		int z = 0;//number of frame acknowledgment
+		for(int k = i; k < i + N && k <= tf; k++){
+			cout << "Sending frames :" << k << endl;
+			tt++;
+		}
+		for(int k = i; k < i + N && k <= tf; k++){
+			int f = rand() % 2;
+			if(!f){
+				cout << "Acknowledgment for the frame :" << k << endl;
+				z++;
+			}else{
+				cout << "TimeOut!! Frame number : " << k << " Not received" << endl;
+			        cout << "Retransmitting window" << endl;
+		       		break;	       
+			}
+		}
+		cout << endl;
+		i = i + z;
+	}
+}
+int main(){
+	ll i = 1, N, tf, tt = 0;
+	srand(time(NULL));
+	cout << "Plaese enter the number of frame to be transmitted :";
+	cin >> tf;
+	cout << "Please Enter the window size :";
+	cin >> N;
+	transmission(i, N, tf, tt);
+	cout << "Total number of frame transmitted and retransmitted :" << tt ;
+	return 0;	
+}
